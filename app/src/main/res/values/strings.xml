@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">HorrorClubApp</string>
+
+    <!--> OnboardScreen <-->
+    <string name="tv_welcome">Welcome to the club</string>
+    <string name="app_description">The best movie streaming app to make your day scary!</string>
+    <string name="button_start">Get Started</string>
+    <!--> <-->
+
+    <!--> OnboardScreen <-->
+    <string name="tv_login">Let`s you in</string>
+    <string name="tv_dont_have_account">Dont`t have a account</string>
+    <string name="button_login">Log In</string>
+    <!--> <-->
+
+    <!--> Content Descriptions <-->
+    <string name="ct_icon_app">HorrorClubApp</string>
+    <!--> <-->
+</resources>
