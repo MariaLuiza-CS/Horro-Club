@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">HorrorClubApp</string>
 
+    <!--> General <-->
+    <string name="tv_email">Email</string>
+    <string name="tv_password">Password</string>
+    <string name="tv_confirm_password">Confirm Password</string>
+    <!--> <-->
+
     <!--> OnboardScreen <-->
     <string name="tv_welcome">Welcome to the club</string>
     <string name="app_description">The best movie streaming app to make your day scary!</string>

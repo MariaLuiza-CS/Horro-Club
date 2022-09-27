@@ -13,10 +13,13 @@ import com.example.horrorclubapp.utils.Screen
 
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
+fun SetupNavGraph(
+    navController: NavHostController,
+    startDestination : String
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route
+        startDestination = startDestination
     ) {
         composable(route = Screen.Splash.route) {
             AnimatedSplashScreen(navController = navController)

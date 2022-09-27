@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.112" />
         <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/drawable/ic_ghost.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/drawable/ic_ghost_svg.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/drawable/ic_launch_ghost_background.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/mipmap-anydpi-v26/ic_launch_ghost.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/mipmap-anydpi-v26/ic_launch_ghost_round.xml" value="0.112" />
+        <entry key="..\:/Users/Maria.Luiza/AndroidStudioProjects/HorrorClubApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.112" />
       </map>
     </option>
   </component>

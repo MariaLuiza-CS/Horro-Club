@@ -14,7 +14,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.horrorclubapp.ui.screen.onboardingscreen.OnboardViewModel
 import com.example.horrorclubapp.ui.theme.dark_black
 import com.example.horrorclubapp.ui.theme.pink
 import com.example.horrorclubapp.ui.theme.purple
@@ -23,7 +25,10 @@ import com.example.horrorclubapp.utils.GradientButton
 import com.example.horrorclubapp.utils.Screen
 
 @Composable
-fun OnboardScreen(navController: NavHostController) {
+fun OnboardScreen(
+    navController: NavHostController,
+    onboardViewModel: OnboardViewModel = hiltViewModel()
+) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -74,6 +79,7 @@ fun OnboardScreen(navController: NavHostController) {
                     colors = listOf(purple, pink)
                 )
             ) {
+                onboardViewModel.saveOnBoardingState(completed = true)
                 navController.popBackStack()
                 navController.navigate(Screen.Home.route)
             }
