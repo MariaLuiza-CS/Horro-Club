@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "52449414552",
+    "project_id": "horrorclubapp",
+    "storage_bucket": "horrorclubapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52449414552:android:ae76a7ad0c51d6c6ce6fed",
+        "android_client_info": {
+          "package_name": "com.example.horrorclubapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52449414552-c5lmkh98d12jdhnk8ubel63cja9pi187.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.horrorclubapp",
+            "certificate_hash": "aaf8e9d709a51456128b32c7d35c44b6dfca1a0a"
+          }
+        },
+        {
+          "client_id": "52449414552-cb6ovgu23gnqhmg4r4kinqgv90vglogn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj8mAmwz-QR3q0vRINt44k0_FETOxGC98"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52449414552-cb6ovgu23gnqhmg4r4kinqgv90vglogn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

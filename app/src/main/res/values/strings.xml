@@ -13,13 +13,21 @@
     <string name="button_start">Get Started</string>
     <!--> <-->
 
-    <!--> OnboardScreen <-->
+    <!--> LoginScreen <-->
     <string name="tv_login">Let`s you in</string>
-    <string name="tv_dont_have_account">Dont`t have a account</string>
+    <string name="tv_dont_have_account">Don`t have a account</string>
     <string name="button_login">Log In</string>
+    <string name="tv_rebember_me">Remember me</string>
+    <string name="tv_or">or</string>
+    <string name="tv_sign_up">Sign Up</string>
     <!--> <-->
 
     <!--> Content Descriptions <-->
-    <string name="ct_icon_app">HorrorClubApp</string>
+    <string name="ct_icon_app">logo app</string>
+    <string name="ct_icon_google">logo google</string>
+    <string name="ct_icon_email">email icon</string>
+    <string name="ct_icon_password">password icon</string>
+    <string name="ct_icon_facebook">logo facebook</string>
+    <string name="ct_icon_user">user icon</string>
     <!--> <-->
 </resources>

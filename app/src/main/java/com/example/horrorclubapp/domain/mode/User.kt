@@ -1,0 +1,17 @@
+package com.example.horrorclubapp.domain.mode
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "user")
+data class User(
+    @PrimaryKey
+    var id: String,
+
+    @ColumnInfo(name = "name")
+    var name: String?,
+
+    @ColumnInfo(name = "email")
+    var email: String?
+)

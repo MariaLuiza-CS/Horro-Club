@@ -11,8 +11,8 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.example.horrorclubapp.navigation.SetupNavGraph
-import com.example.horrorclubapp.ui.screen.splashscreen.SplashViewModel
-import com.example.horrorclubapp.ui.theme.SplashScreenTheme
+import com.example.horrorclubapp.presentation.splashscreen.SplashViewModel
+import com.example.horrorclubapp.presentation.theme.SplashScreenTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

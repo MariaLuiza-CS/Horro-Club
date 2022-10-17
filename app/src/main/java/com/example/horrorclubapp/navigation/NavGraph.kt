@@ -7,15 +7,16 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.horrorclubapp.AnimatedSplashScreen
-import com.example.horrorclubapp.OnboardScreen
-import com.example.horrorclubapp.utils.Screen
+import com.example.horrorclubapp.presentation.splashscreen.AnimatedSplashScreen
+import com.example.horrorclubapp.presentation.loginscreen.LoginScreen
+import com.example.horrorclubapp.presentation.onboardingscreen.OnboardScreen
+import com.example.horrorclubapp.presentation.utils.Screen
 
 
 @Composable
 fun SetupNavGraph(
     navController: NavHostController,
-    startDestination : String
+    startDestination: String
 ) {
     NavHost(
         navController = navController,
@@ -24,11 +25,14 @@ fun SetupNavGraph(
         composable(route = Screen.Splash.route) {
             AnimatedSplashScreen(navController = navController)
         }
-        composable(route = Screen.Home.route) {
-            Box(modifier = Modifier.fillMaxSize())
-        }
         composable(route = Screen.Onboard.route) {
             OnboardScreen(navController = navController)
+        }
+        composable(route = Screen.Login.route) {
+            LoginScreen(navController = navController)
+        }
+        composable(route = Screen.Home.route) {
+            Box(modifier = Modifier.fillMaxSize())
         }
     }
 }
