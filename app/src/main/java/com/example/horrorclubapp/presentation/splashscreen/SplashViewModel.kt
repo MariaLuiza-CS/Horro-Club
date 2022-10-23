@@ -6,13 +6,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horrorclubapp.data.local.onboarddatasource.DataStoreRepository
+import com.example.horrorclubapp.domain.repository.AuthGoogleRepository
 import com.example.horrorclubapp.presentation.utils.Screen
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(
-    private val dataStoreRepository: DataStoreRepository
+    private val dataStoreRepository: DataStoreRepository,
+    private val authGoogleRepository: AuthGoogleRepository,
 ) : ViewModel() {
+    private val isUserAuthenticated get() = authGoogleRepository.isUserAuthenticatedInFirebase
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
@@ -24,7 +27,8 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             dataStoreRepository.readOnBoardingState().collect { completed ->
                 if (completed) {
-                    _startDestination.value = Screen.Login.route
+                    if (isUserAuthenticated) _startDestination.value = Screen.Home.route
+                        else _startDestination.value = Screen.Login.route
                 } else {
                     _startDestination.value = Screen.Onboard.route
                 }

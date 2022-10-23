@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">HorrorClubApp</string>
 
+    <!--> Firebase <-->
+    <string name="web_client_id">52449414552-cb6ovgu23gnqhmg4r4kinqgv90vglogn.apps.googleusercontent.com</string>
+    <!--> <-->
+
     <!--> General <-->
     <string name="tv_email">Email</string>
     <string name="tv_password">Password</string>

@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.horrorclubapp.presentation.homescreen.HomeScreen
 import com.example.horrorclubapp.presentation.splashscreen.AnimatedSplashScreen
 import com.example.horrorclubapp.presentation.loginscreen.LoginScreen
 import com.example.horrorclubapp.presentation.onboardingscreen.OnboardScreen
@@ -32,7 +33,7 @@ fun SetupNavGraph(
             LoginScreen(navController = navController)
         }
         composable(route = Screen.Home.route) {
-            Box(modifier = Modifier.fillMaxSize())
+            HomeScreen(navController = navController)
         }
     }
 }

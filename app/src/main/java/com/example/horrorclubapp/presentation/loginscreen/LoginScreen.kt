@@ -1,6 +1,6 @@
 package com.example.horrorclubapp.presentation.loginscreen
 
-import androidx.activity.compose.rememberLauncherForActivityResult
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -21,30 +20,41 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.horrorclubapp.R
+import com.example.horrorclubapp.domain.mode.Response
 import com.example.horrorclubapp.presentation.theme.*
 import com.example.horrorclubapp.presentation.utils.Screen
-import com.example.horrorclubapp.presentation.utils.Utils
-import com.example.horrorclubapp.presentation.utils.googleauth.AuthResultContract
-import com.example.horrorclubapp.presentation.utils.views.GoogleButton
 import com.example.horrorclubapp.presentation.utils.views.GradientButton
+import com.example.horrorclubapp.presentation.utils.views.ProgressBar
 import com.example.horrorclubapp.utils.TextInput
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(
-    navController: NavHostController,
-    viewModel: LoginScreenViewModel = hiltViewModel()
+    navController: NavHostController, viewModel: LoginScreenViewModel = hiltViewModel()
 ) {
 
-    lateinit var auth: FirebaseAuth
     var isChecked by remember { mutableStateOf(true) }
 
-    val coroutineScope = rememberCoroutineScope()
-    var text by remember { mutableStateOf<String?>(null) }
-    val user by remember(viewModel) { viewModel.user }.collectAsState()
-    val signInRequestCode = 1
+    val launcher = rememberFirebaseAuthLauncher(onAuthComplete = {
+        if (it) {
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+        }
+    }, onAuthError = {
+        Log.e(it.message, it.message.toString())
+    })
+
+    when (val signInWithGoogleFirebaseResponse = viewModel.googleSignInClient) {
+        is Response.Loading -> ProgressBar()
+        is Response.Success -> signInWithGoogleFirebaseResponse.data?.let {
+            LaunchedEffect(it) {
+                launcher.launch(it.signInIntent)
+            }
+
+        }
+        is Response.Failure -> LaunchedEffect(Unit) {
+            print(signInWithGoogleFirebaseResponse.e)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -54,8 +64,7 @@ fun LoginScreen(
         verticalArrangement = Arrangement.Bottom
     ) {
         Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp),
+            modifier = Modifier.padding(horizontal = 16.dp),
         ) {
             Text(
                 text = stringResource(id = R.string.tv_login),
@@ -65,27 +74,22 @@ fun LoginScreen(
                 color = if (isSystemInDarkTheme()) white else dark_black,
                 style = MaterialTheme.typography.h5
             )
-            Spacer(modifier = Modifier.height(132.dp))
+            Spacer(modifier = Modifier.height(80.dp))
             TextInput(textLabel = stringResource(id = R.string.tv_email))
             Spacer(modifier = Modifier.height(16.dp))
             TextInput(textLabel = stringResource(id = R.string.tv_password))
         }
         Spacer(modifier = Modifier.height(16.dp))
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             Checkbox(
-                checked = isChecked,
-                onCheckedChange = {
+                checked = isChecked, onCheckedChange = {
                     isChecked = it
-                },
-                colors = CheckboxDefaults.colors(
-                    uncheckedColor = white_dark,
-                    checkedColor = purple,
-                    checkmarkColor = white
+                }, colors = CheckboxDefaults.colors(
+                    uncheckedColor = white_dark, checkedColor = purple, checkmarkColor = white
                 )
             )
             Spacer(modifier = Modifier.width(8.dp))
@@ -125,22 +129,25 @@ fun LoginScreen(
         }
         Spacer(modifier = Modifier.height(16.dp))
         Row(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-
-            AuthScreen(viewModel = viewModel, navController)
-
+            Button(
+                onClick = {
+                    viewModel.googleAuthSecond()
+                }, modifier = Modifier.background(Color.Transparent), shape = RoundedCornerShape(50)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_google),
+                    contentDescription = stringResource(id = R.string.ct_icon_google),
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             Button(
                 onClick = {
 
-                },
-                modifier = Modifier
-                    .background(Color.Transparent),
-                shape = RoundedCornerShape(50)
+                }, modifier = Modifier.background(Color.Transparent), shape = RoundedCornerShape(50)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_facebook),
@@ -150,8 +157,7 @@ fun LoginScreen(
         }
         Spacer(modifier = Modifier.height(64.dp))
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         ) {
             GradientButton(
                 text = stringResource(id = R.string.button_login),
@@ -165,9 +171,7 @@ fun LoginScreen(
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center
             ) {
                 Text(
                     text = stringResource(id = R.string.tv_dont_have_account),
@@ -185,39 +189,6 @@ fun LoginScreen(
             }
         }
     }
-}
-
-@Composable
-fun AuthScreen(viewModel: LoginScreenViewModel, navController: NavHostController) {
-
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
-    var text by remember { mutableStateOf<String?>(null) }
-    val user by remember(viewModel) { viewModel.user }.collectAsState()
-    val signInRequestCode = 1
-
-    val authResultLauncher =
-        rememberLauncherForActivityResult(contract = AuthResultContract()) { task ->
-            try {
-                val account = task?.getResult(ApiException::class.java)
-                if (account == null) {
-                    Utils().showToast(context, text)
-                } else {
-                    coroutineScope.launch {
-                        viewModel.insertUser(account)
-                        navController.popBackStack()
-                        navController.navigate(Screen.Home.route)
-                    }
-                }
-            } catch (e: ApiException) {
-                Utils().showToast(context, e.message)
-            }
-        }
-
-    GoogleButton {
-        authResultLauncher.launch(signInRequestCode)
-    }
-
 
 }
 
