@@ -4,15 +4,30 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.horrorclubapp.R
-import com.example.horrorclubapp.data.local.onboarddatasource.DataStoreRepository
-import com.example.horrorclubapp.data.local.usedatasource.UserDataBase
-import com.example.horrorclubapp.data.repository.AuthGoogleRepositoryImpl
-import com.example.horrorclubapp.data.repository.ProfileRepositoryImpl
-import com.example.horrorclubapp.data.repository.UserRepositoryImpl
-import com.example.horrorclubapp.domain.repository.AuthGoogleRepository
-import com.example.horrorclubapp.domain.repository.ProfileRepository
-import com.example.horrorclubapp.domain.repository.UserRepository
-import com.example.horrorclubapp.domain.usecase.*
+import com.example.horrorclubapp.data.UserDataBase
+import com.example.horrorclubapp.data.onboarddatasource.DataStoreRepository
+import com.example.horrorclubapp.data.repository.local.MovieRepositoryImpl
+import com.example.horrorclubapp.data.repository.local.TVShowRepositoryImpl
+import com.example.horrorclubapp.data.repository.local.UserRepositoryImpl
+import com.example.horrorclubapp.data.repository.remote.AuthGoogleRepositoryImpl
+import com.example.horrorclubapp.data.repository.remote.ProfileRepositoryImpl
+import com.example.horrorclubapp.data.repository.remote.TheMovieDbRepositoryImpl
+import com.example.horrorclubapp.domain.repository.local.MovieRepository
+import com.example.horrorclubapp.domain.repository.local.TVShowRepository
+import com.example.horrorclubapp.domain.repository.local.UserRepository
+import com.example.horrorclubapp.domain.repository.remote.AuthGoogleRepository
+import com.example.horrorclubapp.domain.repository.remote.ProfileRepository
+import com.example.horrorclubapp.domain.repository.remote.TheMovieDbRepository
+import com.example.horrorclubapp.domain.usecase.movie.GetMovies
+import com.example.horrorclubapp.domain.usecase.movie.InsertMovie
+import com.example.horrorclubapp.domain.usecase.movie.MovieUseCases
+import com.example.horrorclubapp.domain.usecase.tmbd.GetMovieList
+import com.example.horrorclubapp.domain.usecase.tmbd.GetTVShowList
+import com.example.horrorclubapp.domain.usecase.tmbd.TMDBUseCases
+import com.example.horrorclubapp.domain.usecase.tvshow.GetTVShow
+import com.example.horrorclubapp.domain.usecase.tvshow.InsertTVShow
+import com.example.horrorclubapp.domain.usecase.tvshow.TVShowUseCases
+import com.example.horrorclubapp.domain.usecase.user.*
 import com.example.horrorclubapp.presentation.utils.Constants.GOOGLE_SIGNIN
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -91,6 +106,7 @@ object MainModule {
                 UserDataBase.DATABASE_NAME
             )
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
     }
 
@@ -102,6 +118,24 @@ object MainModule {
 
     @Provides
     @Singleton
+    fun provideMovieRepository(db: UserDataBase): MovieRepository {
+        return MovieRepositoryImpl(db.movieDatabaseDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTVShowRepository(db: UserDataBase): TVShowRepository {
+        return TVShowRepositoryImpl(db.tvShowDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTheMovieRepository(): TheMovieDbRepository {
+        return TheMovieDbRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
     fun provideUserUseCases(
         userRepository: UserRepository,
         authGoogleRepository: AuthGoogleRepository
@@ -109,8 +143,44 @@ object MainModule {
         return UserUseCases(
             getUser = GetUser(userRepository),
             insertUser = InsertUser(userRepository),
+            deleteUser = DeleteUser(userRepository),
             signInWithGoogle = SignInWithGoogle(authGoogleRepository),
-            signInWithCredentialGoogle = SignInWithCredentialGoogle(authGoogleRepository)
+            signInWithCredentialGoogle = SignInWithCredentialGoogle(authGoogleRepository),
+            signInWithEmailAndPassword = SignInWithEmailAndPassword(authGoogleRepository),
+            createWithEmailAndPassword = CreateWithEmailAndPassword(authGoogleRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieUseCases(
+        movieRepository: MovieRepository
+    ): MovieUseCases {
+        return MovieUseCases(
+            getMovies = GetMovies(movieRepository),
+            insertMovie = InsertMovie(movieRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideTVShowUseCases(
+        tvShowRepository: TVShowRepository
+    ): TVShowUseCases {
+        return TVShowUseCases(
+            getTVShow = GetTVShow(tvShowRepository),
+            insertTVShow = InsertTVShow(tvShowRepository)
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideTMDBUseCases(
+        theMovieDbRepository: TheMovieDbRepository
+    ): TMDBUseCases {
+        return TMDBUseCases(
+            getMovieList = GetMovieList(theMovieDbRepository),
+            getTVShowList = GetTVShowList(theMovieDbRepository)
         )
     }
 
@@ -119,5 +189,4 @@ object MainModule {
     fun provideDataStoreRepository(
         @ApplicationContext context: Context
     ) = DataStoreRepository(context = context)
-
 }

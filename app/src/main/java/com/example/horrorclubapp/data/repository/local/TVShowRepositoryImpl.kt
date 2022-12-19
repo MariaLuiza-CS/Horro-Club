@@ -1,0 +1,15 @@
+package com.example.horrorclubapp.data.repository.local
+
+import com.example.horrorclubapp.data.dao.TVShowDao
+import com.example.horrorclubapp.domain.mode.TVShow
+import com.example.horrorclubapp.domain.repository.local.TVShowRepository
+
+class TVShowRepositoryImpl(private val tvShowDao: TVShowDao) : TVShowRepository {
+    override suspend fun insertTVShow(tvShow: TVShow) {
+        tvShowDao.insertTVShow(tvShow)
+    }
+
+    override suspend fun getTVShow(): List<TVShow>? {
+        return tvShowDao.getTVShow()
+    }
+}

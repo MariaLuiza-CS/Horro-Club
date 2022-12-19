@@ -1,16 +1,14 @@
 package com.example.horrorclubapp.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.horrorclubapp.presentation.homescreen.HomeScreen
-import com.example.horrorclubapp.presentation.splashscreen.AnimatedSplashScreen
+import com.example.horrorclubapp.presentation.MainScreen
 import com.example.horrorclubapp.presentation.loginscreen.LoginScreen
 import com.example.horrorclubapp.presentation.onboardingscreen.OnboardScreen
+import com.example.horrorclubapp.presentation.signupscreen.SignUpScreen
+import com.example.horrorclubapp.presentation.splashscreen.AnimatedSplashScreen
 import com.example.horrorclubapp.presentation.utils.Screen
 
 
@@ -32,8 +30,11 @@ fun SetupNavGraph(
         composable(route = Screen.Login.route) {
             LoginScreen(navController = navController)
         }
-        composable(route = Screen.Home.route) {
-            HomeScreen(navController = navController)
+        composable(route = Screen.SignUp.route) {
+            SignUpScreen(navController = navController)
+        }
+        composable(route = Screen.Main.route) {
+            MainScreen()
         }
     }
 }

@@ -1,11 +1,31 @@
 package com.example.horrorclubapp.presentation.utils
 
-import android.content.Context
-import android.widget.Toast
+import androidx.core.util.PatternsCompat.EMAIL_ADDRESS
 
-class Utils {
+object Utils {
 
-    fun showToast(context: Context, text: String?) {
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+    fun validatePassword(password: String): Boolean {
+        return password.length < 8 ||
+                password
+                    .filter { it.isDigit() }
+                    .firstOrNull() == null ||
+                password
+                    .filter { it.isLetter() }
+                    .filter { it.isUpperCase() }
+                    .firstOrNull() == null ||
+                password
+                    .filter { it.isLetter() }
+                    .filter { it.isLowerCase() }
+                    .firstOrNull() == null ||
+                password
+                    .filter { !it.isLetterOrDigit() }
+                    .firstOrNull() == null
+    }
+
+    fun validateEmail(email: String): Boolean {
+        return !email.isEmpty() ||
+                EMAIL_ADDRESS
+                    .matcher(email)
+                    .matches()
     }
 }

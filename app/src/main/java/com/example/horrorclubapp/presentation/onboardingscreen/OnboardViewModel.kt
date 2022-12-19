@@ -2,7 +2,7 @@ package com.example.horrorclubapp.presentation.onboardingscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.horrorclubapp.data.local.onboarddatasource.DataStoreRepository
+import com.example.horrorclubapp.data.onboarddatasource.DataStoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

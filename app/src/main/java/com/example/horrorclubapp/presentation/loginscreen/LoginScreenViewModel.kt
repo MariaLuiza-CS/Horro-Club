@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horrorclubapp.domain.mode.Response
 import com.example.horrorclubapp.domain.mode.User
-import com.example.horrorclubapp.domain.repository.SignInWithGoogleFirebaseResponse
-import com.example.horrorclubapp.domain.repository.SignInWithGoogleResponse
-import com.example.horrorclubapp.domain.usecase.UserUseCases
+import com.example.horrorclubapp.domain.repository.remote.SignInWithEmailAndPasswordFirebaseResponse
+import com.example.horrorclubapp.domain.repository.remote.SignInWithGoogleFirebaseResponse
+import com.example.horrorclubapp.domain.repository.remote.SignInWithGoogleResponse
+import com.example.horrorclubapp.domain.usecase.user.UserUseCases
 import com.google.firebase.auth.AuthCredential
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -28,6 +29,9 @@ class LoginScreenViewModel @Inject constructor(
     var googleSignInClient by mutableStateOf<SignInWithGoogleFirebaseResponse>(Response.Success(null))
         private set
 
+    var signInWithEmailAndPassword by mutableStateOf<SignInWithEmailAndPasswordFirebaseResponse>(Response.Success(null))
+        private set
+
     private val _user: MutableStateFlow<User?> = MutableStateFlow(null)
     val user: StateFlow<User?> = _user
 
@@ -40,5 +44,14 @@ class LoginScreenViewModel @Inject constructor(
         signInWithGoogleResponse = userUseCases.signInWithCredentialGoogle(googleCredential)
     }
 
+    fun signInWithEmailAndPassword(
+        email: String,
+        password: String
+    ) = viewModelScope.launch {
+        signInWithEmailAndPassword = userUseCases.signInWithEmailAndPassword(
+            email = email,
+            password = password
+        )
+    }
 
 }

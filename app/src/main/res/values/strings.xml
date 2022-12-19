@@ -8,12 +8,13 @@
     <!--> General <-->
     <string name="tv_email">Email</string>
     <string name="tv_password">Password</string>
-    <string name="tv_confirm_password">Confirm Password</string>
+    <string name="tv_error_password">Please enter a valid password</string>
+    <string name="tv_error_email">Please enter a valid email</string>
     <!--> <-->
 
     <!--> OnboardScreen <-->
     <string name="tv_welcome">Welcome to the club</string>
-    <string name="app_description">The best movie streaming app to make your day scary!</string>
+    <string name="app_description">The best movieResponse streaming app to make your day scary!</string>
     <string name="button_start">Get Started</string>
     <!--> <-->
 
@@ -25,6 +26,14 @@
     <string name="tv_or">or</string>
     <string name="tv_sign_up">Sign Up</string>
     <!--> <-->
+
+    <!--> SignUpScreen <-->
+    <string name="tv_or_continue">or continue with</string>
+    <string name="tv_confirm_password">Confirm Password</string>
+    <string name="tv_error_confirm_password">Different password</string>
+    <string name="tv_already_have_account">Already have an account?</string>
+    <string name="button_sing_in">Sign In</string>
+    <string name="tv_register">Register</string>
 
     <!--> Content Descriptions <-->
     <string name="ct_icon_app">logo app</string>

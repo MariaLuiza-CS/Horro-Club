@@ -24,58 +24,6 @@ import com.example.horrorclubapp.presentation.theme.white_dark
 
 
 @Composable
-fun TextInput(
-    textLabel: String
-): String {
-
-    var text by remember { mutableStateOf("") }
-    var passwordVisibility by remember { mutableStateOf(false) }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
-        OutlinedTextField(
-            value = text,
-            onValueChange = { newText ->
-                text = newText
-            },
-            placeholder = { Text(text = textLabel) },
-            singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(dark_light, shape = RoundedCornerShape(15.dp))
-                .border(1.dp, white_dark, shape = RoundedCornerShape(15.dp)),
-            keyboardOptions = KeyboardOptions(
-                keyboardType = setKeyBoardOptions(textLabel),
-                imeAction = ImeAction.Done
-            ),
-            trailingIcon = {
-                IconButton(
-                    onClick = { passwordVisibility = !passwordVisibility },
-                    enabled = enableIcon(textLabel = textLabel)
-                ) {
-                    Icon(
-                        painter = setIcon(textLabel, passwordVisibility),
-                        contentDescription = setIconDescription(textLabel),
-                        tint = white_dark
-                    )
-                }
-            },
-            visualTransformation = passwordVisualTransformation(textLabel, passwordVisibility),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                backgroundColor = Color.Transparent,
-                disabledBorderColor = Color.Transparent,
-                unfocusedBorderColor = Color.Transparent,
-                focusedBorderColor = Color.Transparent,
-                cursorColor = white_dark
-            )
-        )
-    }
-    return text
-}
-
-@Composable
 fun passwordVisualTransformation(
     textLabel: String,
     passwordVisibility: Boolean
