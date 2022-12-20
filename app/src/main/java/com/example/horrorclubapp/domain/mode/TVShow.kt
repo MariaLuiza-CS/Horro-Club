@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "tv_show")
 data class TVShow(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "id")
-    var id : Int,
-    @ColumnInfo(name = "title")
-    var title : String?,
+    var id : Int?,
+    @ColumnInfo(name = "original_name")
+    var original_name : String?,
     @ColumnInfo(name = "overview")
     var overview : String?,
     @ColumnInfo(name = "poster_path")

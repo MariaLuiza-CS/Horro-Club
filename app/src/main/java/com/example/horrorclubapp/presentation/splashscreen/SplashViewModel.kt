@@ -14,7 +14,6 @@ import com.example.horrorclubapp.domain.usecase.tmbd.TMDBUseCases
 import com.example.horrorclubapp.domain.usecase.tvshow.TVShowUseCases
 import com.example.horrorclubapp.presentation.utils.Screen
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -70,7 +69,7 @@ class SplashViewModel @Inject constructor(
                                     if (it == 27) {
                                         movieUseCases.insertMovie.invoke(
                                             Movie(
-                                                id = 0,
+                                                id = movie.id,
                                                 title = movie.title,
                                                 overview = movie.overview,
                                                 poster_path = movie.poster_path,
@@ -102,8 +101,8 @@ class SplashViewModel @Inject constructor(
                                     if (it == 9648) {
                                         tvShowUseCases.insertTVShow.invoke(
                                             TVShow(
-                                                id = 0,
-                                                title = tvShow.title,
+                                                id = tvShow.id,
+                                                original_name = tvShow.original_name,
                                                 overview = tvShow.overview,
                                                 poster_path = tvShow.poster_path,
                                                 first_air_date = tvShow.first_air_date,

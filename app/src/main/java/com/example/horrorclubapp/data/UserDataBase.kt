@@ -15,7 +15,7 @@ import com.example.horrorclubapp.domain.mode.User
         Movie::class,
         TVShow::class
     ],
-    version = 7,
+    version = 10,
     exportSchema = false
 )
 abstract class UserDataBase : RoomDatabase() {

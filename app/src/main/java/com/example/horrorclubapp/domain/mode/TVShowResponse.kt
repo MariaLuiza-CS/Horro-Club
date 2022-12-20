@@ -3,8 +3,10 @@ package com.example.horrorclubapp.domain.mode
 import com.google.gson.annotations.SerializedName
 
 data class TVShowResponse(
-    @SerializedName("title")
-    var title: String,
+    @SerializedName("id")
+    var id: Int,
+    @SerializedName("original_name")
+    var original_name: String,
     @SerializedName("overview")
     var overview: String,
     @SerializedName("poster_path")

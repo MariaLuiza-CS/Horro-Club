@@ -15,6 +15,7 @@ import com.example.horrorclubapp.domain.repository.remote.SignOutResponse
 import com.example.horrorclubapp.domain.usecase.movie.MovieUseCases
 import com.example.horrorclubapp.domain.usecase.tvshow.TVShowUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -79,10 +80,14 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     fun getAllMovies() = viewModelScope.launch {
-        movieResponses = movieUseCases.getMovies.invoke()
+        movieUseCases.getMovies.invoke().collect{
+            movieResponses = it
+        }
     }
 
     fun getAllTVShow() = viewModelScope.launch {
-        tvShowResponses = tvShowUseCases.getTVShow.invoke()
+        tvShowUseCases.getTVShow.invoke().collect{
+            tvShowResponses = it
+        }
     }
 }
