@@ -38,16 +38,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val systemUiController = rememberSystemUiController()
-                    systemUiController.setSystemBarsColor(
-                        color = dark_black
-                    )
                     val screen by splashViewModel.startDestination
                     val navController = rememberNavController()
                     SetupNavGraph(navController = navController, startDestination = screen)
                 }
             }
-
         }
     }
 }

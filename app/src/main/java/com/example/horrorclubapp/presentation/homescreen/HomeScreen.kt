@@ -35,43 +35,17 @@ import com.example.horrorclubapp.presentation.theme.purple
 import com.example.horrorclubapp.presentation.utils.Screen
 import com.example.horrorclubapp.presentation.utils.views.MovieCard
 import com.example.horrorclubapp.presentation.utils.views.ProgressBar
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
-
-    when (val signOutResponse = viewModel.signOutResponse) {
-        is Response.Loading -> ProgressBar()
-        is Response.Success -> signOutResponse.data?.let { signedOut ->
-            if (signedOut) {
-                LaunchedEffect(signedOut) {
-                    navController.popBackStack()
-                    navController.navigate(Screen.Login.route)
-                }
-            }
-
-        }
-        is Response.Failure -> LaunchedEffect(Unit) {
-            print(signOutResponse.e)
-        }
-    }
-    when (val revokeAccessResponse = viewModel.revokeAccessResponse) {
-        is Response.Loading -> ProgressBar()
-        is Response.Success -> revokeAccessResponse.data?.let { accessRevoked ->
-            if (accessRevoked) {
-                LaunchedEffect(accessRevoked) {
-                    navController.popBackStack()
-                    navController.navigate(Screen.Login.route)
-                }
-            }
-
-        }
-        is Response.Failure -> LaunchedEffect(Unit) {
-            print(revokeAccessResponse.e)
-        }
-    }
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setSystemBarsColor(
+        color = dark_black
+    )
 
     if (viewModel.movieResponses != null) {
         Column(

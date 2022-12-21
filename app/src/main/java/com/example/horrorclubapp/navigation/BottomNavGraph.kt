@@ -4,15 +4,18 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.horrorclubapp.presentation.avatarscreen.AvatarScreen
 import com.example.horrorclubapp.presentation.homescreen.HomeScreen
 import com.example.horrorclubapp.presentation.profilescreen.ProfileScreen
 import com.example.horrorclubapp.presentation.searchscreen.SearchScreen
+import com.example.horrorclubapp.presentation.utils.Screen
 import com.example.horrorclubapp.presentation.utils.views.BottomBarNavigation
 
 
 @Composable
 fun SetUpBottomNavGraph(
-    navController: NavHostController
+    navController: NavHostController,
+    navController02: NavHostController
 ) {
     NavHost(
         navController = navController,
@@ -25,7 +28,10 @@ fun SetUpBottomNavGraph(
             SearchScreen(navController = navController)
         }
         composable(route = BottomBarNavigation.Profile.route) {
-            ProfileScreen(navController = navController)
+            ProfileScreen(navController = navController, navController02)
+        }
+        composable(route = Screen.AvatarScreen.route) {
+            AvatarScreen(navController = navController)
         }
     }
 }

@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.horrorclubapp.navigation.SetUpBottomNavGraph
@@ -21,7 +22,7 @@ import com.example.horrorclubapp.presentation.theme.pink
 import com.example.horrorclubapp.presentation.utils.views.BottomBarNavigation
 
 @Composable
-fun MainScreen() {
+fun MainScreen(navController02: NavHostController) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomBar(navController = navController) },
@@ -29,7 +30,10 @@ fun MainScreen() {
             Column(
                 modifier = Modifier.padding(it)
             ) {
-                SetUpBottomNavGraph(navController = navController)
+                SetUpBottomNavGraph(
+                    navController = navController,
+                    navController02 = navController02
+                )
             }
         }
     )
