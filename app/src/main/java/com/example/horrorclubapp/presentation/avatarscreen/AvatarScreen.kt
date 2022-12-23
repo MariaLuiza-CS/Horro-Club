@@ -47,78 +47,86 @@ fun AvatarScreen(
         color = green
     )
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(green),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Bottom
-    ) {
-        TopAppBar(
-            title = {
-                Text(
-                    text = "Avatar",
-                    textAlign = TextAlign.Start,
-                    style = MaterialTheme.typography.h2,
-                    fontSize = 24.sp
-                )
-            },
-            navigationIcon = {
-                IconButton(onClick = { /*TODO*/ }) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_arrow_back),
-                        contentDescription = "null"
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Avatar",
+                        textAlign = TextAlign.Start,
+                        style = MaterialTheme.typography.h2,
+                        fontSize = 24.sp
                     )
-                }
-            },
-            elevation = 0.dp,
-            backgroundColor = Color.Transparent,
-            contentColor = Color.White
-        )
-        Column(
-            modifier = Modifier
-                .height(250.dp)
-                .fillMaxWidth()
-                .padding(bottom = 20.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            HorizontalPager(count = viewModel.charactersList.size, state = pagerState) { page ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Image(
-                        painterResource(id = viewModel.charactersList[page]),
-                        contentDescription = stringResource(R.string.ct_icon_app),
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(200.dp)
-                            .border(
-                                BorderStroke(4.dp, pink), CircleShape
-                            )
-                            .padding(4.dp)
-                            .clip(CircleShape)
-                    )
-                }
-            }
-        }
-        HorizontalPagerIndicator(
-            pagerState = pagerState,
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .padding(end = 8.dp, start = 8.dp, bottom = 250.dp),
-        )
-        Column(Modifier.padding(16.dp)) {
-
-            GradientButton(
-                text = "Choose", textColor = white, gradient = Brush.horizontalGradient(
-                    colors = listOf(purple, pink)
-                )
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_arrow_back),
+                            contentDescription = "null"
+                        )
+                    }
+                },
+                elevation = 0.dp,
+                backgroundColor = green,
+                contentColor = Color.White
+            )
+        }, content = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(green)
+                    .padding(it),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom
             ) {
-                navController.navigate(Screen.Main.route)
+                Column(
+                    modifier = Modifier
+                        .height(250.dp)
+                        .fillMaxWidth()
+                        .padding(bottom = 20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    HorizontalPager(
+                        count = viewModel.charactersList.size,
+                        state = pagerState
+                    ) { page ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Image(
+                                painterResource(id = viewModel.charactersList[page]),
+                                contentDescription = stringResource(R.string.ct_icon_app),
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(200.dp)
+                                    .border(
+                                        BorderStroke(4.dp, pink), CircleShape
+                                    )
+                                    .padding(4.dp)
+                                    .clip(CircleShape)
+                            )
+                        }
+                    }
+                }
+                HorizontalPagerIndicator(
+                    pagerState = pagerState,
+                    modifier = Modifier
+                        .align(Alignment.CenterHorizontally)
+                        .padding(end = 8.dp, start = 8.dp, bottom = 250.dp),
+                )
+                Column(Modifier.padding(16.dp)) {
+                    GradientButton(
+                        text = "Choose", textColor = white, gradient = Brush.horizontalGradient(
+                            colors = listOf(purple, pink)
+                        )
+                    ) {
+                        navController.navigate(Screen.Main.route)
+                    }
+                }
             }
-        }
-    }
+
+        })
 }

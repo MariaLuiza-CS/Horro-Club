@@ -71,6 +71,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     testImplementation "com.google.truth:truth:1.1"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
     // Splash API
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'

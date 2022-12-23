@@ -37,7 +37,7 @@ fun AnimatedSplashScreen(navController: NavHostController) {
 fun Splash() {
     Box(
         modifier = Modifier
-            .background(if (isSystemInDarkTheme()) dark_black else white)
+            .background(dark_black)
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {

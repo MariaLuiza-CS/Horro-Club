@@ -127,7 +127,7 @@ fun LoginScreen(
                 modifier = Modifier.fillMaxWidth(),
                 fontSize = 26.sp,
                 textAlign = TextAlign.Start,
-                color = if (isSystemInDarkTheme()) white else dark_black,
+                color = white,
                 style = MaterialTheme.typography.h5
             )
             Spacer(modifier = Modifier.height(80.dp))

@@ -56,7 +56,7 @@ fun OnboardScreen(
                 text = stringResource(id = R.string.tv_welcome),
                 fontSize = 24.sp,
                 textAlign = TextAlign.Center,
-                color = if (isSystemInDarkTheme()) white else dark_black,
+                color = white,
                 style = MaterialTheme.typography.h6
             )
             Spacer(modifier = Modifier.height(20.dp))
@@ -64,7 +64,7 @@ fun OnboardScreen(
                 text = stringResource(id = R.string.app_description),
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
-                color = if (isSystemInDarkTheme()) white else dark_black,
+                color = white,
                 style = MaterialTheme.typography.h3
             )
             Spacer(modifier = Modifier.height(60.dp))

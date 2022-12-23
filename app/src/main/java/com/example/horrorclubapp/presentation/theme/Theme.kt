@@ -24,11 +24,7 @@ fun HorrorClubAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+    val colors = DarkColorPalette
 
     MaterialTheme(
         colors = colors,
@@ -43,11 +39,9 @@ fun SplashScreenTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
+    val colors =
         DarkColorPalette
-    } else {
-        LightColorPalette
-    }
+
 
     MaterialTheme(
         colors = colors,
