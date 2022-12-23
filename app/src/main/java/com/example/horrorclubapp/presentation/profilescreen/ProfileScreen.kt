@@ -134,7 +134,7 @@ fun ProfileScreen(
                         Icons.Filled.KeyboardArrowDown
                     Column(
                         modifier = Modifier
-                            .height(250.dp)
+                            .height(200.dp)
                             .fillMaxWidth()
                             .padding(bottom = 20.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -150,7 +150,7 @@ fun ProfileScreen(
                                 contentDescription = stringResource(R.string.ct_icon_app),
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier
-                                    .size(200.dp)
+                                    .size(150.dp)
                                     .border(
                                         BorderStroke(4.dp, pink), CircleShape
                                     )
@@ -202,7 +202,8 @@ fun ProfileScreen(
                             textColor = Color.White,
                             trailingIconColor = Color.White,
                             disabledTextColor = Color.White,
-                            disabledTrailingIconColor = Color.White
+                            disabledTrailingIconColor = Color.White,
+                            disabledLeadingIconColor = Color.White
                         )
                     )
                     DropdownMenu(
