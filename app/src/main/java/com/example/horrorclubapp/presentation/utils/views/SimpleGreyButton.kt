@@ -43,7 +43,8 @@ fun SimpleGreyButton(
             modifier = Modifier
                 .background(dark_light)
                 .padding(16.dp, 16.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 icon,
@@ -54,7 +55,7 @@ fun SimpleGreyButton(
             Text(
                 text = text,
                 color = Color.White,
-                fontSize = 18.sp,
+                fontSize = 15.sp,
                 style = MaterialTheme.typography.h4
             )
         }

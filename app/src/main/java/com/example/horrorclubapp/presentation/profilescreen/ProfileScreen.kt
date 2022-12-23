@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -29,6 +31,7 @@ import com.example.horrorclubapp.domain.mode.Response
 import com.example.horrorclubapp.presentation.theme.dark_black
 import com.example.horrorclubapp.presentation.theme.dark_light
 import com.example.horrorclubapp.presentation.theme.pink
+import com.example.horrorclubapp.presentation.theme.purple
 import com.example.horrorclubapp.presentation.utils.Screen
 import com.example.horrorclubapp.presentation.utils.views.ProgressBar
 import com.example.horrorclubapp.presentation.utils.views.SimpleGreyButton
@@ -142,7 +145,7 @@ fun ProfileScreen(
                     ) {
                         Box(
                             modifier = Modifier
-                                .fillMaxSize(),
+                                .size(200.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Image(
@@ -157,6 +160,43 @@ fun ProfileScreen(
                                     .padding(4.dp)
                                     .clip(CircleShape)
                             )
+                            Column(
+                                modifier = Modifier.size(200.dp).padding(end = 20.dp, bottom = 5.dp),
+                                horizontalAlignment = Alignment.End,
+                                verticalArrangement = Arrangement.Bottom
+                            ) {
+                                Button(
+                                    onClick = {
+
+                                    },
+                                    shape = RoundedCornerShape(50),
+                                    modifier = Modifier
+                                        .background(
+                                            Transparent
+                                        )
+                                        .height(40.dp)
+                                        .width(50.dp),
+
+                                    contentPadding = PaddingValues()
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxSize()
+                                            .background(
+                                                Brush.horizontalGradient(
+                                                    colors = listOf(purple, pink)
+                                                )
+                                            ),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Edit,
+                                            contentDescription = "null",
+                                            modifier = Modifier.size(30.dp)
+                                        )
+                                    }
+                                }
+                            }
                         }
                     }
                     SimpleGreyButton(
