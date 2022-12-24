@@ -129,6 +129,7 @@ fun ProfileScreen(
                         "Any Pronouns"
                     )
                     var selectedText by remember { mutableStateOf("Pronouns") }
+                    var nameText by remember { mutableStateOf("Name") }
                     var textfieldSize by remember { mutableStateOf(Size.Zero) }
 
                     val icon = if (expanded)
@@ -167,7 +168,7 @@ fun ProfileScreen(
                             ) {
                                 Button(
                                     onClick = {
-
+                                        navController02.navigate(Screen.AvatarScreen.route)
                                     },
                                     shape = RoundedCornerShape(50),
                                     modifier = Modifier
@@ -192,20 +193,39 @@ fun ProfileScreen(
                                         Icon(
                                             imageVector = Icons.Default.Edit,
                                             contentDescription = "null",
-                                            modifier = Modifier.size(30.dp)
+                                            modifier = Modifier.size(24.dp),
+                                            tint = Color.White
                                         )
                                     }
                                 }
                             }
                         }
                     }
-                    SimpleGreyButton(
-                        text = "Zomby Leon Grimes ",
-                        icon = Icons.Default.Person,
-                        contentDescription = "Person Button"
-                    ) {
-                        navController02.navigate(Screen.AvatarScreen.route)
-                    }
+                    OutlinedTextField(
+                        value = nameText,
+                        onValueChange = { nameText = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .onGloballyPositioned { coordinates ->
+                                //This value is used to assign to the DropDown the same width
+                                textfieldSize = coordinates.size.toSize()
+                            },
+                        label = { null },
+                        leadingIcon = {
+                            Icon(Icons.Default.Person, "contentDescription")
+                        },
+                        shape = RoundedCornerShape(40),
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            backgroundColor = dark_light,
+                            focusedBorderColor = dark_light,
+                            unfocusedBorderColor = dark_light,
+                            textColor = Color.White,
+                            trailingIconColor = Color.White,
+                            disabledTextColor = Color.White,
+                            disabledTrailingIconColor = Color.White,
+                            disabledLeadingIconColor = Color.White
+                        )
+                    )
                     Spacer(modifier = Modifier.height(20.dp))
                     SimpleGreyButton(
                         text = "veggiebrain@email.com",

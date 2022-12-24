@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Green
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.asImageBitmap
@@ -136,7 +137,8 @@ fun HomeScreen(
                             Icon(
                                 imageVector = Icons.Default.PlayArrow,
                                 contentDescription = "null",
-                                modifier = Modifier.size(30.dp)
+                                modifier = Modifier.size(30.dp),
+                                tint = Color.White
                             )
                         }
                     }
