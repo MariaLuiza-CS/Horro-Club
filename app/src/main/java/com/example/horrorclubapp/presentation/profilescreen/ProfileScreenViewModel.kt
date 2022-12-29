@@ -7,10 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.horrorclubapp.R
 import com.example.horrorclubapp.domain.mode.Response
+import com.example.horrorclubapp.domain.mode.User
 import com.example.horrorclubapp.domain.repository.remote.ProfileRepository
 import com.example.horrorclubapp.domain.repository.remote.RevokeAccessResponse
 import com.example.horrorclubapp.domain.repository.remote.SignOutResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +26,17 @@ class ProfileScreenViewModel @Inject constructor(
 
     var revokeAccessResponse by mutableStateOf<RevokeAccessResponse>(Response.Success(false))
         private set
+
+    var user by mutableStateOf(User(
+        id = "id",
+        name = "name",
+        email = "email"
+    ))
+        private set
+
+    init {
+        getAuthUser()
+    }
 
     var charactersList by mutableStateOf(
         listOf(
@@ -50,4 +64,7 @@ class ProfileScreenViewModel @Inject constructor(
         revokeAccessResponse = profileRepository.revokeAccess()
     }
 
+    fun getAuthUser() = viewModelScope.launch {
+        user = profileRepository.authUser()
+    }
 }

@@ -115,21 +115,23 @@ fun ProfileScreen(
                     Modifier.padding(16.dp)
                 ) {
                     var expanded by remember { mutableStateOf(false) }
-                    val suggestions = listOf(
-                        "They",
-                        "She",
-                        "He",
-                        "Co",
-                        "En",
-                        "Ey",
-                        "Xie",
-                        "Yo",
-                        "Ze",
-                        "Ve",
-                        "Any Pronouns"
-                    )
+                    val suggestions by remember {
+                        mutableStateOf(listOf(
+                            "They",
+                            "She",
+                            "He",
+                            "Co",
+                            "En",
+                            "Ey",
+                            "Xie",
+                            "Yo",
+                            "Ze",
+                            "Ve",
+                            "Any Pronouns"
+                        ))
+                    }
                     var selectedText by remember { mutableStateOf("Pronouns") }
-                    var nameText by remember { mutableStateOf("Name") }
+                    var nameText by remember { mutableStateOf(viewModel.user.name.toString()) }
                     var textfieldSize by remember { mutableStateOf(Size.Zero) }
 
                     val icon = if (expanded)
@@ -162,7 +164,9 @@ fun ProfileScreen(
                                     .clip(CircleShape)
                             )
                             Column(
-                                modifier = Modifier.size(200.dp).padding(end = 20.dp, bottom = 5.dp),
+                                modifier = Modifier
+                                    .size(200.dp)
+                                    .padding(end = 20.dp, bottom = 5.dp),
                                 horizontalAlignment = Alignment.End,
                                 verticalArrangement = Arrangement.Bottom
                             ) {
@@ -228,7 +232,7 @@ fun ProfileScreen(
                     )
                     Spacer(modifier = Modifier.height(20.dp))
                     SimpleGreyButton(
-                        text = "veggiebrain@email.com",
+                        text = viewModel.user.email.toString(),
                         icon = Icons.Default.Email,
                         contentDescription = "Person Button"
                     ) {
@@ -272,12 +276,12 @@ fun ProfileScreen(
                         modifier = Modifier
                             .width(with(LocalDensity.current) { textfieldSize.width.toDp() })
                     ) {
-                        suggestions.forEach { label ->
+                        suggestions.forEach { pronouns ->
                             DropdownMenuItem(onClick = {
-                                selectedText = label
+                                selectedText = pronouns
                                 expanded = false
                             }) {
-                                Text(text = label)
+                                Text(text = pronouns)
                             }
                         }
                     }

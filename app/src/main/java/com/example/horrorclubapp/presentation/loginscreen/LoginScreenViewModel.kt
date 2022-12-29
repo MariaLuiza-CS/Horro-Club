@@ -32,9 +32,6 @@ class LoginScreenViewModel @Inject constructor(
     var signInWithEmailAndPassword by mutableStateOf<SignInWithEmailAndPasswordFirebaseResponse>(Response.Success(null))
         private set
 
-    private val _user: MutableStateFlow<User?> = MutableStateFlow(null)
-    val user: StateFlow<User?> = _user
-
     fun googleAuthSecond() = viewModelScope.launch {
         googleSignInClient = Response.Loading
         googleSignInClient = userUseCases.signInWithGoogle.invoke()
@@ -53,5 +50,4 @@ class LoginScreenViewModel @Inject constructor(
             password = password
         )
     }
-
 }
